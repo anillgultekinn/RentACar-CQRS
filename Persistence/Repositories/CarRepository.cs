@@ -5,9 +5,9 @@ using Persistence.Contexts;
 
 namespace Persistence.Repositories;
 
-public class BrandRepository : EfRepositoryBase<Brand, Guid, BaseDbContext>, IBrandRepository
+public class CarRepository : EfRepositoryBase<Car, Guid, BaseDbContext>, ICarRepository
 {
-    public BrandRepository(BaseDbContext context) : base(context)
+    public CarRepository(BaseDbContext context) : base(context)
     {
     }
 }
