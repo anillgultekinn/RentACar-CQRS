@@ -1,5 +1,6 @@
 ﻿using Application.Services.Repositories;
 using AutoMapper;
+using Core.Applicaton.Pipelines.Caching;
 using Core.Applicaton.Requests;
 using Core.Applicaton.Responses;
 using Core.Persistence.Paging;
@@ -8,9 +9,15 @@ using MediatR;
 
 namespace Application.Features.Brands.Queries.GetList;
 
-public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDto>>
+public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
+
+    public string CacheKey => $"GetListBrandQuery({PageRequest.PageIndex},{PageRequest.PageSize})";
+
+    public bool BypassCache { get; }
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListBrandQueryHandler : IRequestHandler<GetListBrandQuery, GetListResponse<GetListBrandListItemDto>>
     {
