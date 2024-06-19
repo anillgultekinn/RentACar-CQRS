@@ -1,4 +1,5 @@
-﻿using Core.Application.Pipelines.Transaction;
+﻿using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Transaction;
 using Core.Applicaton.Pipelines.Caching;
 using Core.Applicaton.Pipelines.Validation;
 using Core.Applicaton.Rules;
@@ -25,6 +26,7 @@ public static class ApplicationServiceRegistration
             configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
             configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
             configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
+            configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
         });
         return services;
     }
